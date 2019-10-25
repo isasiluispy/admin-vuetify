@@ -11,6 +11,7 @@
   import Sidebar from "../components/Sidebar";
 
   export default {
+    name: 'DashboardLayout',
     data: () => ({
       drawer: true,
     }),
