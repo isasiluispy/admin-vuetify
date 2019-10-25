@@ -1,8 +1,12 @@
 <template>
-    <v-app id="inspire">
+    <v-app>
         <sidebar :drawer="drawer"/>
         <navbar @changeDrawer="updateDrawer"/>
-        <router-view/>
+        <v-content>
+            <v-container fluid>
+                <router-view/>
+            </v-container>
+        </v-content>
     </v-app>
 </template>
 
