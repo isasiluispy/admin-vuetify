@@ -45,7 +45,7 @@
                     <v-list-item
                             v-for="(child, i) in item.children"
                             :key="i"
-                            to="/"
+                            @click="redirect"
                     >
                         <v-list-item-action v-if="child.icon">
                             <v-icon>{{ child.icon }}</v-icon>
@@ -60,7 +60,7 @@
                 <v-list-item
                         v-else
                         :key="item.text"
-                        to="/"
+                        @click="redirect"
                 >
                     <v-list-item-action>
                         <v-icon>{{ item.icon }}</v-icon>
@@ -86,21 +86,21 @@
     },
     data: () => ({
       items: [
-        {icon: 'contacts', text: 'Contacts'},
-        {icon: 'history', text: 'Frequently contacted'},
-        {icon: 'content_copy', text: 'Duplicates'},
+        {icon: 'mdi-contacts', text: 'Contacts'},
+        {icon: 'mdi-history', text: 'Frequently contacted'},
+        {icon: 'mdi-content-copy', text: 'Duplicates'},
         {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
+          icon: 'mdi-chevron-up',
+          'icon-alt': 'mdi-chevron-down',
           text: 'Labels',
           model: true,
           children: [
-            {icon: 'add', text: 'Create label'},
+            {icon: 'mdi-plus', text: 'Create label'},
           ],
         },
         {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
+          icon: 'mdi-chevron-up',
+          'icon-alt': 'mdi-chevron-down',
           text: 'More',
           model: false,
           children: [
@@ -111,13 +111,17 @@
             {text: 'Other contacts'},
           ],
         },
-        {icon: 'settings', text: 'Settings'},
-        {icon: 'chat_bubble', text: 'Send feedback'},
-        {icon: 'help', text: 'Help'},
-        {icon: 'phonelink', text: 'App downloads'},
-        {icon: 'keyboard', text: 'Go to the old version'},
+        {icon: 'mdi-settings', text: 'Settings'},
+        {icon: 'mdi-message', text: 'Send feedback'},
+        {icon: 'mdi-help-circle', text: 'Help'},
+        {icon: 'mdi-cellphone-link', text: 'App downloads'},
+        {icon: 'mdi-keyboard', text: 'Go to the old version'},
       ],
-    })
+    }),
+    methods: {
+      redirect() {
+      }
+    }
   }
 </script>
 

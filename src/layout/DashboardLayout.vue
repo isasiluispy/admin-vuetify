@@ -12,7 +12,7 @@
 
   export default {
     data: () => ({
-      drawer: false,
+      drawer: true,
     }),
     components: {
       navbar: Navbar,
