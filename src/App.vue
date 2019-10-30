@@ -13,6 +13,7 @@
 <script>
   import Navbar from "./components/Navbar";
   import Sidebar from "./components/Sidebar";
+  import {AUTH_LOGOUT} from "./store/types/auth";
 
   export default {
     name: 'App',
@@ -32,6 +33,18 @@
       isSimpleView() {
         return ['login'].indexOf(this.$route.name) > -1;
       }
+    },
+    created() {
+      this.$http.interceptors.response.use(undefined, function (err) {
+        return new Promise(function () {
+          if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+            // if you ever get an unauthorized, logout the user
+            this.$store.dispatch(AUTH_LOGOUT)
+            // you can also redirect to /login if needed !
+          }
+          throw err;
+        });
+      });
     }
   };
 </script>
