@@ -1,4 +1,4 @@
-import {AUTH_IS_AUTHENTICATED, AUTH_LOGOUT, AUTH_REQUEST, AUTH_STATUS, AUTH_SUCCESS} from "../types/auth";
+import {Types as authTypes} from "./types";
 import axios from 'axios';
 
 const state = {
@@ -6,31 +6,29 @@ const state = {
 };
 
 const getters = {
-  [AUTH_IS_AUTHENTICATED]: state => !!state.token,
-  [AUTH_STATUS]: state => state.status,
+  [authTypes.getters.IS_AUTENTICATED]: state => !!state.token
 };
 
 const actions = {
-  [AUTH_REQUEST]: async ({commit}, user) => {
+  [authTypes.actions.LOGIN]: async ({commit}, user) => {
     try {
-
       const response = await this.$http({url: '/auth/login', data: user, method: 'POST'});
       const token = response.data.token;
       localStorage.setItem('token', token); // store the token in localstorage
       axios.defaults.headers.common['Authorization'] = token;
-      commit(AUTH_SUCCESS, token)
+      commit(authTypes.actions.SUCCESS, token)
     } catch (e) {
       localStorage.removeItem('token');
     }
   },
-  [AUTH_LOGOUT]: () => {
+  [authTypes.actions.LOGOUT]: () => {
     localStorage.removeItem('token'); // clear your user's token from localstorage
     delete axios.defaults.headers.common['Authorization']
   }
 };
 
 const mutations = {
-  [AUTH_SUCCESS]: (state, token) => {
+  [authTypes.actions.LOGIN]: (state, token) => {
     state.token = token
   }
 };

@@ -13,7 +13,7 @@
 <script>
   import Navbar from "./components/Navbar";
   import Sidebar from "./components/Sidebar";
-  import {AUTH_LOGOUT} from "./store/types/auth";
+  import {Types as authTypes} from "./store/modules/auth/types";
 
   export default {
     name: 'App',
@@ -39,7 +39,7 @@
         return new Promise(function () {
           if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
             // if you ever get an unauthorized, logout the user
-            this.$store.dispatch(AUTH_LOGOUT)
+            this.$store.dispatch(authTypes.actions.LOGOUT);
             // you can also redirect to /login if needed !
           }
           throw err;
