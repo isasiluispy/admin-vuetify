@@ -1,5 +1,5 @@
 import {Types as authTypes} from "./types";
-import axios from 'axios';
+import api from "../../../api";
 
 const state = {
   token: localStorage.getItem('token') || '',
@@ -10,20 +10,26 @@ const getters = {
 };
 
 const actions = {
-  [authTypes.actions.LOGIN]: async ({commit}, user) => {
+  [authTypes.actions.LOGIN]: async ({commit}, userData) => {
     try {
-      const response = await this.$http({url: '/auth/login', data: user, method: 'POST'});
-      const token = response.data.token;
+      const response = await api.auth.login(userData);
+      const token = response.data.key;
       localStorage.setItem('token', token); // store the token in localstorage
-      axios.defaults.headers.common['Authorization'] = token;
-      commit(authTypes.actions.SUCCESS, token)
+      api.auth.setToken(token);
+      commit(authTypes.actions.LOGIN, token)
     } catch (e) {
       localStorage.removeItem('token');
+      throw e;
     }
   },
   [authTypes.actions.LOGOUT]: () => {
     localStorage.removeItem('token'); // clear your user's token from localstorage
-    delete axios.defaults.headers.common['Authorization']
+    api.auth.logout();
+  },
+  [authTypes.actions.SET_TOKEN]: () => {
+    if (state.token) {
+      api.auth.setToken(state.token);
+    }
   }
 };
 

@@ -3,21 +3,11 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify';
 import store from './store'
-import axios from 'axios'
-
-
-const baseAxios = axios.create({
-  baseURL: 'http://localhost:8000',
-});
-
-Vue.prototype.$http = baseAxios;
+import {Types as authTypes} from './store/modules/auth/types'
 
 Vue.config.productionTip = false;
 
-const token = localStorage.getItem('token');
-if (token) {
-  axios.defaults.headers.common['Authorization'] = token
-}
+store.dispatch(authTypes.actions.SET_TOKEN);
 
 new Vue({
   router,

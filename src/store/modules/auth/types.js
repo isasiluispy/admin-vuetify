@@ -8,6 +8,7 @@ export const Types = {
     LOGIN: `${namespaceUnderscore}LOGIN`,
     SUCCESS: `${namespaceUnderscore}SUCCESS`,
     LOGOUT: `${namespaceUnderscore}LOGOUT`,
+    SET_TOKEN: `${namespaceUnderscore}SET_TOKEN`,
   }
 };
 
