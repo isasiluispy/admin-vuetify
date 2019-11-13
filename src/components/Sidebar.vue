@@ -45,7 +45,7 @@
                     <v-list-item
                             v-for="(child, i) in item.children"
                             :key="i"
-                            @click="redirect"
+                            :to="{name: item.pathName}"
                     >
                         <v-list-item-action v-if="child.icon">
                             <v-icon>{{ child.icon }}</v-icon>
@@ -60,7 +60,7 @@
                 <v-list-item
                         v-else
                         :key="item.text"
-                        @click="redirect"
+                        :to="{name: item.pathName}"
                 >
                     <v-list-item-action>
                         <v-icon>{{ item.icon }}</v-icon>
@@ -86,42 +86,12 @@
     },
     data: () => ({
       items: [
-        {icon: 'mdi-contacts', text: 'Contacts'},
-        {icon: 'mdi-history', text: 'Frequently contacted'},
-        {icon: 'mdi-content-copy', text: 'Duplicates'},
-        {
-          icon: 'mdi-chevron-up',
-          'icon-alt': 'mdi-chevron-down',
-          text: 'Labels',
-          model: true,
-          children: [
-            {icon: 'mdi-plus', text: 'Create label'},
-          ],
-        },
-        {
-          icon: 'mdi-chevron-up',
-          'icon-alt': 'mdi-chevron-down',
-          text: 'More',
-          model: false,
-          children: [
-            {text: 'Import'},
-            {text: 'Export'},
-            {text: 'Print'},
-            {text: 'Undo changes'},
-            {text: 'Other contacts'},
-          ],
-        },
-        {icon: 'mdi-settings', text: 'Settings'},
-        {icon: 'mdi-message', text: 'Send feedback'},
-        {icon: 'mdi-help-circle', text: 'Help'},
-        {icon: 'mdi-cellphone-link', text: 'App downloads'},
-        {icon: 'mdi-keyboard', text: 'Go to the old version'},
+        {icon: 'mdi-contacts', text: 'Dashboard', pathName: 'dashboard'},
+        {icon: 'mdi-history', text: 'Proveedores', pathName: 'proveedorList'},
+        {icon: 'mdi-history', text: 'Reactivos', pathName: 'reactivoList'},
+        {icon: 'mdi-history', text: 'Movimientos', pathName: 'movimientoList'},
       ],
-    }),
-    methods: {
-      redirect() {
-      }
-    }
+    })
   }
 </script>
 

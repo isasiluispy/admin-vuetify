@@ -30,6 +30,24 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
+    path: '/proveedores',
+    name: 'proveedorList',
+    component: () => import('../views/ProveedorList.vue'),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: '/reactivos',
+    name: 'reactivoList',
+    component: () => import('../views/ReactivoList.vue'),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: '/movimientos',
+    name: 'movimientoList',
+    component: () => import('../views/MovimientoList.vue'),
+    beforeEnter: ifAuthenticated,
+  },
+  {
     path: '/login',
     name: 'login',
     component: Login,
