@@ -36,9 +36,21 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
+    path: '/proveedores/nuevo',
+    name: 'proveedorCreate',
+    component: () => import('../views/ProveedorEdit.vue'),
+    beforeEnter: ifAuthenticated,
+  },
+  {
     path: '/reactivos',
     name: 'reactivoList',
     component: () => import('../views/ReactivoList.vue'),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: '/reactivos/nuevo',
+    name: 'reactivoCreate',
+    component: () => import('../views/ReactivoEdit.vue'),
     beforeEnter: ifAuthenticated,
   },
   {

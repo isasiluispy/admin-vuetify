@@ -5,11 +5,11 @@
             color="blue darken-3"
             dark
     >
+        <v-app-bar-nav-icon @click="changeDrawer" />
         <v-toolbar-title
                 style="width: 300px"
                 class="ml-0 pl-4"
         >
-            <v-app-bar-nav-icon @click="changeDrawer"></v-app-bar-nav-icon>
             <span class="hidden-sm-and-down">Google Contacts</span>
         </v-toolbar-title>
         <v-text-field

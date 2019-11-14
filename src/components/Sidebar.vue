@@ -86,10 +86,10 @@
     },
     data: () => ({
       items: [
-        {icon: 'mdi-contacts', text: 'Dashboard', pathName: 'dashboard'},
-        {icon: 'mdi-history', text: 'Proveedores', pathName: 'proveedorList'},
-        {icon: 'mdi-history', text: 'Reactivos', pathName: 'reactivoList'},
-        {icon: 'mdi-history', text: 'Movimientos', pathName: 'movimientoList'},
+        {icon: 'mdi-monitor-dashboard', text: 'Dashboard', pathName: 'dashboard'},
+        {icon: 'mdi-account-group-outline', text: 'Proveedores', pathName: 'proveedorList'},
+        {icon: 'mdi-chemical-weapon', text: 'Reactivos', pathName: 'reactivoList'},
+        {icon: 'mdi-move-resize-variant', text: 'Movimientos', pathName: 'movimientoList'},
       ],
     })
   }
