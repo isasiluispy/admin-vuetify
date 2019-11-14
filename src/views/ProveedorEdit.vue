@@ -1,30 +1,37 @@
 <template>
-    <v-form
-            ref="form"
-            v-model="valid"
-            class="pa-3"
-    >
-        <v-text-field
-                v-model="nombre"
-                :rules="nombreRules"
-                label="Nombre"
-                required
-        ></v-text-field>
 
-        <v-text-field
-                v-model="direccion"
-                label="Dirección"
-        ></v-text-field>
+    <v-card>
+        <v-card-title>Nuevo Proveedor</v-card-title>
+        <v-card-text>
+            <v-form
+                    ref="form"
+                    v-model="valid"
+            >
+                <v-text-field
+                        v-model="nombre"
+                        :rules="nombreRules"
+                        label="Nombre"
+                        required
+                ></v-text-field>
 
-        <v-btn
-                :disabled="!valid"
-                color="success"
-                class="mr-4"
-                @click="save"
-        >
-            Guardar
-        </v-btn>
-    </v-form>
+                <v-text-field
+                        v-model="direccion"
+                        label="Dirección"
+                ></v-text-field>
+
+                <v-btn
+                        :disabled="!valid"
+                        color="success"
+                        class="mr-4"
+                        @click="save"
+                >
+                    Guardar
+                </v-btn>
+            </v-form>
+        </v-card-text>
+    </v-card>
+
+
 </template>
 
 <script>

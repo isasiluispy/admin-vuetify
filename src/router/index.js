@@ -54,9 +54,15 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
-    path: '/movimientos',
-    name: 'movimientoList',
-    component: () => import('../views/MovimientoList.vue'),
+    path: '/compras',
+    name: 'compraList',
+    component: () => import('../views/CompraList.vue'),
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: '/compras/nuevo',
+    name: 'compraCreate',
+    component: () => import('../views/CompraEdit.vue'),
     beforeEnter: ifAuthenticated,
   },
   {

@@ -21,27 +21,23 @@
                 class="hidden-sm-and-down"
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-btn icon>
-            <v-icon>mdi-apps</v-icon>
-        </v-btn>
-        <v-btn icon>
-            <v-icon>mdi-bell</v-icon>
-        </v-btn>
-        <v-btn
-                icon
-                large
-        >
-            <v-avatar
-                    size="32px"
-                    item
-            >
-                <v-img
-                        src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-                        alt="Vuetify"
+        <v-menu bottom left>
+            <template v-slot:activator="{ on }">
+                <v-btn
+                        dark
+                        icon
+                        v-on="on"
                 >
-                </v-img>
-            </v-avatar>
-        </v-btn>
+                    <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+            </template>
+
+            <v-list>
+                <v-list-item @click="onLogout">
+                    <v-list-item-title>Cerrar Sesión</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
     </v-app-bar>
 </template>
 
@@ -51,6 +47,9 @@
     methods: {
       changeDrawer() {
         this.$emit('changeDrawer');
+      },
+      onLogout() {
+        console.log('logout action');
       }
     }
   }
