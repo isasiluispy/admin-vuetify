@@ -1,22 +1,24 @@
 <template>
     <div>
 
-        <v-row no-gutters align="start" justify="space-between" class="mt-3">
-            <v-col md="auto">
-                <h4>Proveedores</h4>
-            </v-col>
-        </v-row>
-
-        <v-row align="start" justify="space-between" class="mt-3">
-            <v-col>
-                <v-data-table
-                        :headers="headers"
-                        :items="rows"
-                        :items-per-page="5"
-                        class="elevation-1"
-                ></v-data-table>
-            </v-col>
-        </v-row>
+        <v-card>
+            <v-card-title>
+                Proveedores
+                <v-spacer></v-spacer>
+                <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Buscar"
+                        single-line
+                        hide-details
+                ></v-text-field>
+            </v-card-title>
+            <v-data-table
+                    :headers="headers"
+                    :items="rows"
+                    :search="search"
+            ></v-data-table>
+        </v-card>
 
         <v-btn
                 bottom
@@ -38,6 +40,7 @@
     name: 'ProveedorList',
     data() {
       return {
+        search: '',
         headers: [
           {
             text: 'Nombre',
@@ -52,8 +55,8 @@
             direccion: 'Direccion de prueba para el proveedor',
           },
           {
-            nombre: 'Proveedor Nombre de Prueba',
-            direccion: 'Direccion de prueba para el proveedor',
+            nombre: 'Reykon Pa Mi',
+            direccion: 'Soy disitnto',
           },
           {
             nombre: 'Proveedor Nombre de Prueba',

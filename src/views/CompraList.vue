@@ -1,22 +1,24 @@
 <template>
     <div>
 
-        <v-row no-gutters align="start" justify="space-between" class="mt-3">
-            <v-col md="auto">
-                <h4>Compras</h4>
-            </v-col>
-        </v-row>
-
-        <v-row align="start" justify="space-between" class="mt-3">
-            <v-col>
-                <v-data-table
-                        :headers="headers"
-                        :items="rows"
-                        :items-per-page="5"
-                        class="elevation-1"
-                ></v-data-table>
-            </v-col>
-        </v-row>
+        <v-card>
+            <v-card-title>
+                Compras
+                <v-spacer></v-spacer>
+                <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Buscar"
+                        single-line
+                        hide-details
+                ></v-text-field>
+            </v-card-title>
+            <v-data-table
+                    :headers="headers"
+                    :items="rows"
+                    :search="search"
+            ></v-data-table>
+        </v-card>
 
         <v-btn
                 bottom
@@ -38,6 +40,7 @@
     name: 'CompraList',
     data() {
       return {
+        search: '',
         headers: [
           {
             text: '# Factura',
