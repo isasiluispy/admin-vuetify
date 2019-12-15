@@ -5,34 +5,21 @@ import store from '../store'
 
 Vue.use(VueRouter);
 
-const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters['isAuthenticated']) {
-    next();
-    return
-  }
-  next({name: 'dashboard'})
-};
-
-const ifAuthenticated = (to, from, next) => {
-  if (store.getters['isAuthenticated']) {
-    next();
-    return;
-  }
-  next({name: 'login'})
-};
-
 const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('../views/Dashboard.vue'),
-    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: '/clientes',
+    name: 'clienteList',
+    component: () => import('../views/cliente/ClienteList.vue'),
   },
   {
     path: '/login',
     name: 'login',
     component: Login,
-    beforeEnter: ifNotAuthenticated,
   },
   {
     path: '*',
@@ -43,6 +30,12 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (!store.getters['isAuthenticated'] && ['login'].indexOf(to.name) === -1) next({name: 'login'});
+  else if (store.getters['isAuthenticated'] && ['login'].indexOf(to.name) > -1) next({name: 'dashboard'});
+  else next();
 });
 
 export default router

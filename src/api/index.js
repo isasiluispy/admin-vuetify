@@ -1,5 +1,4 @@
 import axios from 'axios'
-import types from '@/store/modules/types'
 import store from '../store'
 import router from "@/router";
 
@@ -27,7 +26,7 @@ API.interceptors.response.use(response => {
 }, (err) => {
     if (err.response.status === 401) {
         // if you ever get an unauthorized, logout the user
-        store.dispatch(types.authTypes.actions.LOGOUT);
+        store.dispatch('logout');
         router.push({name: 'login'});
     }
     throw err;
@@ -38,7 +37,15 @@ const auth = {
     logout: () => delete API.defaults.headers.common['Authorization']
 };
 
+const cliente = {
+    getAll: () => API.get('/empresa/clientes/'),
+    get: id => API.get(`/empresa/clientes/${id}/`),
+    create: data => API.post('/empresa/clientes/', data),
+    update: (id, data) => API.put('/empresa/clientes/${id}/', data)
+};
+
 export default {
-    auth
+    auth,
+    cliente
 }
 

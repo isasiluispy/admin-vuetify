@@ -13,7 +13,6 @@
 <script>
   import Navbar from "./components/Navbar";
   import Sidebar from "./components/Sidebar";
-  import api from "./api";
 
   export default {
     name: 'App',
@@ -33,9 +32,6 @@
       isSimpleView() {
         return ['login'].indexOf(this.$route.name) > -1;
       }
-    },
-    created() {
-      api.auth.intercept();
     }
   };
 </script>

@@ -87,9 +87,7 @@
     data: () => ({
       items: [
         {icon: 'mdi-monitor-dashboard', text: 'Dashboard', pathName: 'dashboard'},
-        {icon: 'mdi-account-group-outline', text: 'Proveedores', pathName: 'proveedorList'},
-        {icon: 'mdi-chemical-weapon', text: 'Reactivos', pathName: 'reactivoList'},
-        {icon: 'mdi-move-resize-variant', text: 'Compras', pathName: 'compraList'},
+        {icon: 'mdi-account-group-outline', text: 'Clientes', pathName: 'clienteList'},
       ],
     })
   }
