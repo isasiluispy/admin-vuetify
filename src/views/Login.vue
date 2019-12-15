@@ -51,7 +51,7 @@
                                 prepend-icon="mdi-account"
                                 type="text"
                                 v-model="username"
-                        ></v-text-field>
+                        />
 
                         <v-text-field
                                 id="password"
@@ -60,11 +60,11 @@
                                 prepend-icon="mdi-lock"
                                 type="password"
                                 v-model="password"
-                        ></v-text-field>
+                        />
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
-                    <v-spacer></v-spacer>
+                    <v-spacer/>
                     <v-btn color="primary" :loading="loading" :disabled="loading" @click="login">Login</v-btn>
                 </v-card-actions>
             </v-card>
@@ -81,8 +81,6 @@
 </template>
 
 <script>
-  import {Types as authTypes} from "../store/modules/auth/types";
-
   export default {
     name: 'Login',
     data() {
@@ -100,7 +98,7 @@
         this.loading = true;
 
         try {
-          await this.$store.dispatch(authTypes.actions.LOGIN, {username, password});
+          await this.$store.dispatch('login', {username, password});
           await this.$router.push('/');
         } catch (e) {
           this.snackbar = true;

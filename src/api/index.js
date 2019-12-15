@@ -1,30 +1,44 @@
 import axios from 'axios'
-import {Types as authTypes} from "../store/modules/auth/types";
+import types from '@/store/modules/types'
 import store from '../store'
+import router from "@/router";
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api'
+    baseURL: 'http://localhost:8000/api',
+});
+
+API.interceptors.request.use(
+    config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers['Authorization'] = `Token ${token}`;
+            config.headers['Content-Type'] = 'application/json';
+        }
+
+        return config;
+    },
+    error => {
+        Promise.reject(error)
+    }
+);
+
+API.interceptors.response.use(response => {
+    return response;
+}, (err) => {
+    if (err.response.status === 401) {
+        // if you ever get an unauthorized, logout the user
+        store.dispatch(types.authTypes.actions.LOGOUT);
+        router.push({name: 'login'});
+    }
+    throw err;
 });
 
 const auth = {
-  login: userData => API.post('/auth/login/', userData),
-  logout: () => delete API.defaults.headers.common['Authorization'],
-  intercept: () => {
-    API.interceptors.response.use(undefined, function (err) {
-      return new Promise(function () {
-        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          // if you ever get an unauthorized, logout the user
-          store.dispatch(authTypes.actions.LOGOUT);
-          // you can also redirect to /login if needed !
-        }
-        throw err;
-      });
-    });
-  },
-  setToken: token => API.defaults.headers.common['Authorization'] = token
+    login: userData => API.post('/auth/login/', userData),
+    logout: () => delete API.defaults.headers.common['Authorization']
 };
 
 export default {
-  auth
+    auth
 }
 

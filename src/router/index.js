@@ -2,12 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from "../views/Login";
 import store from '../store'
-import {Types as authTypes} from "../store/modules/auth/types"; // your vuex store
 
 Vue.use(VueRouter);
 
 const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters[authTypes.getters.IS_AUTENTICATED]) {
+  if (!store.getters['isAuthenticated']) {
     next();
     return
   }
@@ -15,9 +14,9 @@ const ifNotAuthenticated = (to, from, next) => {
 };
 
 const ifAuthenticated = (to, from, next) => {
-  if (store.getters[authTypes.getters.IS_AUTENTICATED]) {
+  if (store.getters['isAuthenticated']) {
     next();
-    return
+    return;
   }
   next({name: 'login'})
 };
