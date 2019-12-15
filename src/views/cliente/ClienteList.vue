@@ -3,7 +3,7 @@
 
         <v-card>
             <v-card-title>
-                Proveedores
+                Clientes
                 <v-spacer/>
                 <v-text-field
                         v-model="search"

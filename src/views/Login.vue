@@ -81,33 +81,33 @@
 </template>
 
 <script>
-  export default {
-    name: 'Login',
-    data() {
-      return {
-        username: '',
-        password: '',
-        loading: false,
-        snackbar: false
-      }
-    },
-    methods: {
-      async login() {
-        const {username, password} = this;
+    export default {
+        name: 'Login',
+        data() {
+            return {
+                username: '',
+                password: '',
+                loading: false,
+                snackbar: false
+            }
+        },
+        methods: {
+            login() {
+                const {username, password} = this;
+                this.loading = true;
 
-        this.loading = true;
-
-        try {
-          await this.$store.dispatch('login', {username, password});
-          await this.$router.push('/');
-        } catch (e) {
-          this.snackbar = true;
-        } finally {
-          // deactivate loading
-          this.loading = false;
+                this.$store.dispatch('login', {username, password})
+                    .then(() => {
+                        this.$router.push({name: 'dashboard'});
+                    })
+                    .catch(error => {
+                        this.snackbar = true;
+                        console.log('error', error);
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    })
+            }
         }
-
-      }
     }
-  }
 </script>
