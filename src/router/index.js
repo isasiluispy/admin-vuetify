@@ -30,42 +30,6 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
-    path: '/proveedores',
-    name: 'proveedorList',
-    component: () => import('../views/ProveedorList.vue'),
-    beforeEnter: ifAuthenticated,
-  },
-  {
-    path: '/proveedores/nuevo',
-    name: 'proveedorCreate',
-    component: () => import('../views/ProveedorEdit.vue'),
-    beforeEnter: ifAuthenticated,
-  },
-  {
-    path: '/reactivos',
-    name: 'reactivoList',
-    component: () => import('../views/ReactivoList.vue'),
-    beforeEnter: ifAuthenticated,
-  },
-  {
-    path: '/reactivos/nuevo',
-    name: 'reactivoCreate',
-    component: () => import('../views/ReactivoEdit.vue'),
-    beforeEnter: ifAuthenticated,
-  },
-  {
-    path: '/compras',
-    name: 'compraList',
-    component: () => import('../views/CompraList.vue'),
-    beforeEnter: ifAuthenticated,
-  },
-  {
-    path: '/compras/nuevo',
-    name: 'compraCreate',
-    component: () => import('../views/CompraEdit.vue'),
-    beforeEnter: ifAuthenticated,
-  },
-  {
     path: '/login',
     name: 'login',
     component: Login,
