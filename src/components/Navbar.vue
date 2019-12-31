@@ -19,8 +19,8 @@
                 prepend-inner-icon="mdi-magnify"
                 label="Search"
                 class="hidden-sm-and-down"
-        ></v-text-field>
-        <v-spacer></v-spacer>
+        />
+        <v-spacer/>
         <v-menu bottom left>
             <template v-slot:activator="{ on }">
                 <v-btn

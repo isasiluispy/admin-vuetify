@@ -8,64 +8,40 @@
         >
             <v-card class="elevation-12">
                 <v-toolbar
-                        color="primary"
+                        color="success darken-3"
                         dark
                         flat
                 >
-                    <v-toolbar-title>Login form</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on }">
-                            <v-btn
-                                    href="#"
-                                    icon
-                                    large
-                                    target="_blank"
-                                    v-on="on"
-                            >
-                                <v-icon>mdi-code-tags</v-icon>
-                            </v-btn>
-                        </template>
-                        <span>Source</span>
-                    </v-tooltip>
-                    <v-tooltip right>
-                        <template v-slot:activator="{ on }">
-                            <v-btn
-                                    icon
-                                    large
-                                    href="https://codepen.io/johnjleider/pen/pMvGQO"
-                                    target="_blank"
-                                    v-on="on"
-                            >
-                                <v-icon>mdi-codepen</v-icon>
-                            </v-btn>
-                        </template>
-                        <span>Codepen</span>
-                    </v-tooltip>
+                    <v-toolbar-title>SAR Préstamos</v-toolbar-title>
                 </v-toolbar>
                 <v-card-text>
-                    <v-form>
+                    <form>
                         <v-text-field
-                                label="Login"
+                                label="Nombre de usuario"
                                 name="login"
                                 prepend-icon="mdi-account"
                                 type="text"
-                                v-model="username"
+                                v-model="form.username"
+                                @input="$v.form.username.$touch()"
+                                :error-messages="usernameErrors"
                         />
 
                         <v-text-field
                                 id="password"
-                                label="Password"
+                                label="Contraseña"
                                 name="password"
                                 prepend-icon="mdi-lock"
                                 type="password"
-                                v-model="password"
+                                v-model="form.password"
+                                @input="$v.form.password.$touch()"
                         />
-                    </v-form>
+                    </form>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer/>
-                    <v-btn color="primary" :loading="loading" :disabled="loading" @click="login">Login</v-btn>
+                    <v-btn color="success darken-3" :loading="loading" :disabled="loading || $v.$invalid"
+                           @click="login">Iniciar Sesión
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-col>
@@ -81,22 +57,43 @@
 </template>
 
 <script>
+    import {required} from "vuelidate/lib/validators";
+
     export default {
         name: 'Login',
         data() {
             return {
-                username: '',
-                password: '',
+                form: {
+                    username: '',
+                    password: '',
+                },
                 loading: false,
                 snackbar: false
             }
         },
+        validations: {
+            form: {
+                username: {required},
+                password: {required}
+            }
+        },
+        computed: {
+            usernameErrors() {
+                const errors = [];
+                if (!this.$v.form.username.$dirty) return errors;
+                !this.$v.form.username.required && errors.push('Usuario es requerido.');
+                return errors
+            },
+        },
         methods: {
             login() {
-                const {username, password} = this;
+                this.$v.form.$touch();
+                // if its still pending or an error is returned do not submit
+                if (this.$v.form.$pending || this.$v.form.$error) return;
+                // to form submit after this
                 this.loading = true;
 
-                this.$store.dispatch('login', {username, password})
+                this.$store.dispatch('login', {...this.form})
                     .then(() => {
                         this.$router.push({name: 'dashboard'});
                     })
@@ -107,7 +104,7 @@
                     .finally(() => {
                         this.loading = false;
                     })
-            }
+            },
         }
     }
 </script>
